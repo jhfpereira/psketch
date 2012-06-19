@@ -65,7 +65,8 @@
                     spaceInBetweenX = brushX - brushPos.prevX,
                     spaceInBetweenY = brushY - brushPos.prevY,
                     
-                    spaceInBetweenMax = (Math.abs(spaceInBetweenX) >= Math.abs(spaceInBetweenY)) ? Math.abs(spaceInBetweenX): Math.abs(spaceInBetweenY),
+                    spaceInBetweenMax = (Math.abs(spaceInBetweenX) >= Math.abs(spaceInBetweenY)) ?
+                                            Math.abs(spaceInBetweenX): Math.abs(spaceInBetweenY),
                     
                     stepX = spaceInBetweenX / spaceInBetweenMax,
                     stepY = spaceInBetweenY / spaceInBetweenMax;
@@ -77,7 +78,10 @@
                 
                 ctx.beginPath();
                 
-                ctx.arc(brushPos.x, brushPos.y, (brushSize * (length / timeDiff) / 5) + 1, 0, 2 * Math.PI, false);
+                ctx.arc( brushPos.x, brushPos.y,
+                         (brushSize * (length / timeDiff) / 5) + 1,
+                         0, 2 * Math.PI,
+                         false );
                 
                 ctx.closePath();
                 ctx.fill();

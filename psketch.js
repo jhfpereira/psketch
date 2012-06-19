@@ -47,7 +47,8 @@ var PSketch;
             brushColorShowNode = null,
             canvasColorShowNode = null,
             
-            opacityImageDataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIElEQVQ4jWP4TwCcOXMGL2YYNWBYGEBIASEwasCwMAAAyhSvrtyMQtgAAAAASUVORK5CYII=",
+            opacityImageDataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIE"
+            					  +"lEQVQ4jWP4TwCcOXMGL2YYNWBYGEBIASEwasCwMAAAyhSvrtyMQtgAAAAASUVORK5CYII=",
             
             alreadyInitialized = false,
             prevTimeStamp = -1,
@@ -106,7 +107,8 @@ var PSketch;
             };
             
             
-            return convertValue(colorObj.r) + convertValue(colorObj.g) + convertValue(colorObj.b) + convertValue(parseInt(colorObj.alpha * 255));
+            return   convertValue(colorObj.r) + convertValue(colorObj.g)
+                   + convertValue(colorObj.b) + convertValue(parseInt(colorObj.alpha * 255));
               
         };
         
@@ -267,15 +269,20 @@ var PSketch;
                         spaceInBetweenX = brushX - brushPos.prevX,
                         spaceInBetweenY = brushY - brushPos.prevY,
                         
-                        spaceInBetweenMax = (Math.abs(spaceInBetweenX) >= Math.abs(spaceInBetweenY)) ? Math.abs(spaceInBetweenX): Math.abs(spaceInBetweenY),
+                        spaceInBetweenMax = (Math.abs(spaceInBetweenX) >= Math.abs(spaceInBetweenY)) ?
+                                                Math.abs(spaceInBetweenX): Math.abs(spaceInBetweenY),
                         
                         stepX = spaceInBetweenX / spaceInBetweenMax,
                         stepY = spaceInBetweenY / spaceInBetweenMax;
                     
                     for(var i = 1; i <= Math.abs(spaceInBetweenMax); i+=1) {
-                        var newBrushPos = { x: brushPos.prevX + (i * stepX), y: brushPos.prevY + (i * stepY), prevX: brushPos.prevX, prevY: brushPos.prevY};
+                        var newBrushPos = { x:     brushPos.prevX + (i * stepX),
+                                            y:     brushPos.prevY + (i * stepY),
+                                            prevX: brushPos.prevX,
+                                            prevY: brushPos.prevY               };
                         
-                        brushList[brushSelected].moveOnPainting(chosenContext, newBrushPos, brushOptions, timeDiff);
+                        brushList[brushSelected].moveOnPainting(chosenContext, newBrushPos,
+                                                                brushOptions, timeDiff);
                     }
                 }
                 else {
@@ -298,7 +305,8 @@ var PSketch;
                 
                 if(!brushOptions.eraser && !e.shiftKey) {
                     /*
-                     * Get brushlines and merge it with the canvas in the background (in a really, really dirty way)
+                     * Get brushlines and merge it with the canvas in the background
+                     *  (in a really, really dirty way)
                      */
                     canvasBgContext.save();
                     canvasBgContext.globalAlpha = brushOptions.color.alpha;
@@ -423,12 +431,18 @@ var PSketch;
                 }
                 
                 if(brushColorShowNode) {
-                    brushColorShowNode.style.background = "rgba(" + brushOptions.color.r + ", " + brushOptions.color.g + ", " + brushOptions.color.b + ", " + brushOptions.color.alpha + ")";
+                    brushColorShowNode.style.background =   "rgba("        + brushOptions.color.r
+                                                                    + ", " + brushOptions.color.g
+                                                                    + ", " + brushOptions.color.b
+                                                                    + ", " + brushOptions.color.alpha + ")";
                 }
                 
                 keepHashUpdated();
                 
-                console.log("New Brush-Color: rgba(" + brushOptions.color.r + ", " + brushOptions.color.g + ", " + brushOptions.color.b + ", " + brushOptions.color.alpha + ")" )
+                console.log("New Brush-Color: rgba("        + brushOptions.color.r
+                                                     + ", " + brushOptions.color.g
+                                                     + ", " + brushOptions.color.b
+                                                     + ", " + brushOptions.color.alpha + ")" );
                 return true;
             }
             
@@ -463,12 +477,18 @@ var PSketch;
                 }
                 
                 if(canvasColorShowNode) {
-                    canvasColorShowNode.style.background = "rgba(" + canvasOptions.color.r + ", " + canvasOptions.color.g + ", " + canvasOptions.color.b + ", " + canvasOptions.color.alpha + ")";
+                    canvasColorShowNode.style.background = "rgba("        + canvasOptions.color.r
+                                                                   + ", " + canvasOptions.color.g
+                                                                   + ", " + canvasOptions.color.b
+                                                                   + ", " + canvasOptions.color.alpha + ")";
                 }
                 
                 keepHashUpdated();
                 
-                canvasBg.style.background = "rgba("+ canvasOptions.color.r +", "+ canvasOptions.color.g +", "+ canvasOptions.color.b +", "+ canvasOptions.color.alpha +")";
+                canvasBg.style.background = "rgba("        + canvasOptions.color.r
+                                                    + ", " + canvasOptions.color.g
+                                                    + ", " + canvasOptions.color.b
+                                                    + ", " + canvasOptions.color.alpha + ")";
                 return true;
             }
             
@@ -560,9 +580,10 @@ var PSketch;
 			                        g = imgDat.data[i+1],
 			                        b = imgDat.data[i+2];
 			                        
-			                    //var average = Math.max(r, Math.max(g, b)) + Math.min(r, Math.min(g, b)) / 2;  // lightness; doesn't work
-			                    var average = (r + g + b) / 3;                                                  // average
-			                    //var average = (r * 0.21 + g * 0.71 + b * 0.07);                               // luminosity
+			                    //var average = Math.max(r, Math.max(g, b))
+			                    //              + Math.min(r, Math.min(g, b)) / 2;  // lightness
+			                    var average = (r + g + b) / 3;                      // average
+			                    //var average = (r * 0.21 + g * 0.71 + b * 0.07);   // luminosity
 			                    
 			                    average = Math.floor(average);    
 			                    
@@ -814,12 +835,14 @@ var PSketch;
             canvasWidth = window.innerWidth;
             canvasHeight = window.innerHeight - 30;
             
-            /* Resize every canvas in use, every time the window is resized by the user; only let it become bigger, but never smaller in size */
+            /* Resize every canvas in use, every time the window is resized by the user; only let it
+                become bigger, but never smaller in size */
             window.addEventListener("resize", function(e) {
                 var newWidth = e.target.innerWidth;
                 var newHeight = e.target.innerHeight - 30;
                 
-                /* Keep the current canvas imagedata for a refill, after the canvas is resized to a bigger size */
+                /* Keep the current canvas imagedata for a refill, after the canvas is resized to a
+                    bigger size */
                 var canvasBgData = canvasBgContext.getImageData(0, 0, canvasWidth, canvasHeight);
                 
                 if(newWidth > canvasWidth) {
@@ -902,13 +925,15 @@ var PSketch;
                     var brushItems = [];
                     for(var i = 0; i < brushList.length; i++) {
                         (function(momPos) {
-                            brushItems.push({ caption: brushList[i].info.brushName, clickCallback: function() { chooseBrush(momPos); } });
+                            brushItems.push({ caption:       brushList[i].info.brushName,
+                                              clickCallback: function() { chooseBrush(momPos); } });
                         })(i);
                     }
                     
                     /* Show an info entry, when no brushes were found */
                     if(brushList.length == 0) {
-                        brushItems.push({ caption: "Brushes were not found!", clickCallback: function() {} });
+                        brushItems.push({ caption:       "Brushes were not found!",
+                                          clickCallback: function() {}              });
                     }
                     
                     
@@ -929,7 +954,11 @@ var PSketch;
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
                             subSliderList: [
-                                {caption: "", minValue: brushOptions.minSize, maxValue: brushOptions.maxSize, initialValue: brushOptions.size, callback: function(newValue) { setBrushSize(newValue); }}
+                                { caption:      "",
+                                  minValue:     brushOptions.minSize,
+                                  maxValue:     brushOptions.maxSize,
+                                  initialValue: brushOptions.size,
+                                  callback:     function(newValue) { setBrushSize(newValue); } }
                             ]
                         },
                         {
@@ -943,25 +972,25 @@ var PSketch;
                                     minValue: 0,
                                     maxValue: 255,
                                     initialValue: brushOptions.color.r,
-                                    callback: function(newValue) { setBrushColor("red", newValue); }
+                                    callback: function(newValue) { setBrushColor("red", newValue) }
                                 },
                                 {   caption: "green",
                                     minValue: 0,
                                     maxValue: 255,
                                     initialValue: brushOptions.color.g,
-                                    callback: function(newValue) { setBrushColor("green", newValue); }
+                                    callback: function(newValue) { setBrushColor("green", newValue) }
                                 },
                                 {   caption: "blue",
                                     minValue: 0,
                                     maxValue: 255,
                                     initialValue: brushOptions.color.b,
-                                    callback: function(newValue) { setBrushColor("blue", newValue); }
+                                    callback: function(newValue) { setBrushColor("blue", newValue) }
                                 },
                                 {   caption: "alpha",
                                     minValue: 0.0,
                                     maxValue: 1.0,
                                     initialValue: brushOptions.color.alpha,
-                                    callback: function(newValue) { setBrushColor("alpha", newValue); }
+                                    callback: function(newValue) { setBrushColor("alpha", newValue) }
                                 }
                             ]
                         },
@@ -970,7 +999,7 @@ var PSketch;
                             type: "colorShowBox",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
-                            colorShowBox: {callback: function(node) { brushColorShowNode = node; }}
+                            colorShowBox: { callback: function(node) { brushColorShowNode = node; } }
                         },
                         {
                             id: "canvasItem",
@@ -983,22 +1012,25 @@ var PSketch;
                                     minValue: 0,
                                     maxValue: 255,
                                     initialValue: canvasOptions.color.r,
-                                    callback: function(newValue) { setCanvasColor("red", newValue); }
+                                    callback: function(newValue) { setCanvasColor("red", newValue) }
                                 },
-                                {   caption: "green",
-                                    minValue: 0,
-                                    maxValue: 255,
-                                    initialValue: canvasOptions.color.g, callback: function(newValue) { setCanvasColor("green", newValue); }
+                                {   caption:      "green",
+                                    minValue:     0,
+                                    maxValue:     255,
+                                    initialValue: canvasOptions.color.g,
+                                    callback:     function(newValue) { setCanvasColor("green", newValue) }
                                 },
-                                {   caption: "blue",
-                                    minValue: 0,
-                                    maxValue: 255,
-                                    initialValue: canvasOptions.color.b, callback: function(newValue) { setCanvasColor("blue", newValue); }
+                                {   caption:      "blue",
+                                    minValue:     0,
+                                    maxValue:     255,
+                                    initialValue: canvasOptions.color.b,
+                                    callback:     function(newValue) { setCanvasColor("blue", newValue) }
                                 },
-                                {   caption: "alpha",
-                                    minValue: 0.0,
-                                    maxValue: 1.0,
-                                    initialValue: canvasOptions.color.alpha, callback: function(newValue) { setCanvasColor("alpha", newValue); }
+                                {   caption:      "alpha",
+                                    minValue:     0.0,
+                                    maxValue:     1.0,
+                                    initialValue: canvasOptions.color.alpha,
+                                    callback:     function(newValue) { setCanvasColor("alpha", newValue); }
                                 }
                             ]
                         },
@@ -1007,7 +1039,7 @@ var PSketch;
                             type: "colorShowBox",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
-                            colorShowBox: {callback: function(node) { canvasColorShowNode = node; }}
+                            colorShowBox: { callback: function(node) { canvasColorShowNode = node; } }
                         },
                         
                         
@@ -1085,14 +1117,17 @@ var PSketch;
                             for(var j = 0; j < menueItemsArr[i].subItemsList.length; j++) {
                                 var subListMenueItem = document.createElement("li");
                                 subListMenueItem.innerHTML = menueItemsArr[i].subItemsList[j].caption;
-                                subListMenueItem.addEventListener("click", menueItemsArr[i].subItemsList[j].clickCallback);
-                                //subListMenueItem.addEventListener("mouseover", menueItemsArr[i].subItemsList[j].hoverCallback);
+                                subListMenueItem.addEventListener("click",
+                                    menueItemsArr[i].subItemsList[j].clickCallback);
+                                //subListMenueItem.addEventListener("mouseover",
+                                //  menueItemsArr[i].subItemsList[j].hoverCallback);
                                 subListMenueList.appendChild(subListMenueItem);
                             }
                             
                             menueItem.appendChild(subListContainer);
                         }
-                        else if (menueItemsArr[i].subSliderList && menueItemsArr[i].subSliderList.length > 0) {
+                        else if (    menueItemsArr[i].subSliderList
+                                  && menueItemsArr[i].subSliderList.length > 0 ) {
                             /* Sublistsliders */
                             var subListContainer = document.createElement("div");
                             subListContainer.setAttribute("id", menueItemsArr[i].id + "SubList");
@@ -1100,12 +1135,13 @@ var PSketch;
                             
                             /* Fill the sublist with sublistitems */
                             for(var j = 0; j < menueItemsArr[i].subSliderList.length; j++) {
-                                var subListSlider = createSliderNode(   sliderOptions.width,
-                                                                        menueItemsArr[i].subSliderList[j].caption,
-                                                                        menueItemsArr[i].subSliderList[j].minValue,
-                                                                        menueItemsArr[i].subSliderList[j].maxValue,
-                                                                        menueItemsArr[i].subSliderList[j].initialValue,
-                                                                        menueItemsArr[i].subSliderList[j].callback  );
+                                var subListSlider =
+                                    createSliderNode(   sliderOptions.width,
+                                                        menueItemsArr[i].subSliderList[j].caption,
+                                                        menueItemsArr[i].subSliderList[j].minValue,
+                                                        menueItemsArr[i].subSliderList[j].maxValue,
+                                                        menueItemsArr[i].subSliderList[j].initialValue,
+                                                        menueItemsArr[i].subSliderList[j].callback  );
                                 subListContainer.appendChild(subListSlider);
                             }
                             
@@ -1130,7 +1166,10 @@ var PSketch;
             canvasBg.setAttribute('height', canvasHeight + "px");
             canvasBg.style.position = "absolute";
             canvasBg.style.zIndex = "2";
-            canvasBg.style.background = "rgba("+ canvasOptions.color.r +", "+ canvasOptions.color.g +", "+ canvasOptions.color.b +", "+ canvasOptions.color.alpha +")";
+            canvasBg.style.background = "rgba("        + canvasOptions.color.r
+                                                + ", " + canvasOptions.color.g
+                                                + ", " + canvasOptions.color.b
+                                                + ", " + canvasOptions.color.alpha + ")";
             canvasBg.style.left = canvasBg.offsetX + "px";
             canvasBg.style.top = canvasBg.offsetY + "px";
             canvasBg.innerHTML = "Your browser doesn't support the canvas element!";
@@ -1168,8 +1207,11 @@ var PSketch;
                 canvas.addEventListener("dragover", function(e) { e.preventDefault(); });
                 canvas.addEventListener("drop", imageUpload);
                 
-                /* Disable the contextmenu if possible; right mouse button is used to undo the current drawing in action */
-                canvas.addEventListener("contextmenu", function(e) { e.stopPropagation(); e.preventDefault(); return false; });
+                /* Disable the contextmenu if possible; right mouse button is used to undo
+                    the current drawing in action */
+                canvas.addEventListener("contextmenu", function(e) { e.stopPropagation();
+                                                                     e.preventDefault();
+                                                                     return false;          });
                 
                 alreadyInitialized = true;
                 
