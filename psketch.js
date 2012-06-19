@@ -170,10 +170,10 @@ var PSketch;
                 &&  canvasOptions.color ) {
             
                 var paramList = {
-                    'brushName'     : brushList[brushSelected].info.brushName,
-                    'brushSize'     : brushOptions.size,
-                    'brushColor'    : parseRGBColorCode(brushOptions.color),
-                    'canvasColor'   : parseRGBColorCode(canvasOptions.color)
+                    'brushName':    brushList[brushSelected].info.brushName,
+                    'brushSize':    brushOptions.size,
+                    'brushColor':   parseRGBColorCode(brushOptions.color),
+                    'canvasColor':  parseRGBColorCode(canvasOptions.color)
                 };
                 
                 var concatKeyValueList = [];
@@ -940,17 +940,17 @@ var PSketch;
                     /* Fill the menuelist with menueitems */
                     var menueItemsArr = [
                         {
-                            id: "brushItem",
-                            type: "caption",
-                            caption: "brush",
+                            id:            "brushItem",
+                            type:          "caption",
+                            caption:       "brush",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
-                            subItemsList: brushItems
+                            subItemsList:  brushItems
                         },
                         {
-                            id: "sizeItem",
-                            type: "caption",
-                            caption: "size",
+                            id:            "sizeItem",
+                            type:          "caption",
+                            caption:       "size",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
                             subSliderList: [
@@ -962,57 +962,57 @@ var PSketch;
                             ]
                         },
                         {
-                            id: "colorItem",
-                            type: "caption",
-                            caption: "color",
+                            id:            "colorItem",
+                            type:          "caption",
+                            caption:       "color",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
                             subSliderList: [
-                                {   caption: "red",
-                                    minValue: 0,
-                                    maxValue: 255,
+                                {   caption:     "red",
+                                    minValue:     0,
+                                    maxValue:     255,
                                     initialValue: brushOptions.color.r,
-                                    callback: function(newValue) { setBrushColor("red", newValue) }
+                                    callback:     function(newValue) { setBrushColor("red", newValue) }
                                 },
-                                {   caption: "green",
-                                    minValue: 0,
-                                    maxValue: 255,
+                                {   caption:      "green",
+                                    minValue:     0,
+                                    maxValue:     255,
                                     initialValue: brushOptions.color.g,
-                                    callback: function(newValue) { setBrushColor("green", newValue) }
+                                    callback:     function(newValue) { setBrushColor("green", newValue) }
                                 },
-                                {   caption: "blue",
-                                    minValue: 0,
-                                    maxValue: 255,
+                                {   caption:      "blue",
+                                    minValue:     0,
+                                    maxValue:     255,
                                     initialValue: brushOptions.color.b,
-                                    callback: function(newValue) { setBrushColor("blue", newValue) }
+                                    callback:     function(newValue) { setBrushColor("blue", newValue) }
                                 },
-                                {   caption: "alpha",
-                                    minValue: 0.0,
-                                    maxValue: 1.0,
+                                {   caption:     "alpha",
+                                    minValue:     0.0,
+                                    maxValue:     1.0,
                                     initialValue: brushOptions.color.alpha,
-                                    callback: function(newValue) { setBrushColor("alpha", newValue) }
+                                    callback:     function(newValue) { setBrushColor("alpha", newValue) }
                                 }
                             ]
                         },
                         {
-                            id: "brushColorShowItem",
-                            type: "colorShowBox",
+                            id:            "brushColorShowItem",
+                            type:          "colorShowBox",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
-                            colorShowBox: { callback: function(node) { brushColorShowNode = node; } }
+                            colorShowBox:  { callback: function(node) { brushColorShowNode = node; } }
                         },
                         {
-                            id: "canvasItem",
-                            type: "caption",
-                            caption: "canvas",
+                            id:            "canvasItem",
+                            type:          "caption",
+                            caption:       "canvas",
                             clickCallback: function() {  },
                             hoverCallback: function() {  },
                             subSliderList: [
-                                {   caption: "red",
-                                    minValue: 0,
-                                    maxValue: 255,
+                                {   caption:      "red",
+                                    minValue:     0,
+                                    maxValue:     255,
                                     initialValue: canvasOptions.color.r,
-                                    callback: function(newValue) { setCanvasColor("red", newValue) }
+                                    callback:     function(newValue) { setCanvasColor("red", newValue) }
                                 },
                                 {   caption:      "green",
                                     minValue:     0,
@@ -1046,30 +1046,30 @@ var PSketch;
                         
                         /* Actions */
                         {
-                            id: "saveItem",
-                            type: "caption",
-                            caption: "save",
+                            id:            "saveItem",
+                            type:          "caption",
+                            caption:       "save",
                             clickCallback: function(e) { saveCanvas(false); },
                             hoverCallback: function(e) {  }
                         },
                         {
-                            id: "saveAlphaItem",
-                            type: "caption",
-                            caption: "save+alpha",
+                            id:            "saveAlphaItem",
+                            type:          "caption",
+                            caption:       "save+alpha",
                             clickCallback: function(e) { saveCanvas(true); },
                             hoverCallback: function(e) {  }
                         },
                         {
-                            id: "eraserItem",
-                            type: "caption",
-                            caption: "eraser",
+                            id:            "eraserItem",
+                            type:          "caption",
+                            caption:       "eraser",
                             clickCallback: function(e) { toggleEraser(e); },
                             hoverCallback: function(e) {  }
                         },
                         {
-                            id: "clearItem",
-                            type: "caption",
-                            caption: "clear",
+                            id:            "clearItem",
+                            type:          "caption",
+                            caption:       "clear",
                             clickCallback: function(e) { clearCanvas(e); },
                             hoverCallback: function(e) {  }
                         }
