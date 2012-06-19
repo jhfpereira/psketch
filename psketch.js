@@ -48,7 +48,7 @@ var PSketch;
             canvasColorShowNode = null,
             
             opacityImageDataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIE"
-            					  +"lEQVQ4jWP4TwCcOXMGL2YYNWBYGEBIASEwasCwMAAAyhSvrtyMQtgAAAAASUVORK5CYII=",
+                                  + "lEQVQ4jWP4TwCcOXMGL2YYNWBYGEBIASEwasCwMAAAyhSvrtyMQtgAAAAASUVORK5CYII=",
             
             alreadyInitialized = false,
             prevTimeStamp = -1,
@@ -524,80 +524,80 @@ var PSketch;
         var shortcutPressed = function(e) {
             //console.log("keyPressed:", e.which || e.keyCode);
             //e.ctrlKey
-			//e.shiftKey
-			//e.altKey
-			//e.metaKey
-			
-			console.log(e, e.which, e.keyCode);
-			
-			switch(e.which || e.keyCode) {
-			    case 73:    /* I */
-			    case 105:   /* i */
-			            /* Mirror canvasdata horizontally -> i- or I-Key */
-			            var imgDat = canvasBgContext.getImageData(0, 0, canvasBg.width, canvasBg.height);
-			            
-			            for(var y = 0; y < imgDat.height; y++) {
-			                var xBegin = y * (imgDat.width * 4);
-			                for(var x = 0; x < (imgDat.width * 4) / 2; x+=4) {
-			                    var index = xBegin + x;
-			                    var lastLineIndex = xBegin + (((imgDat.width - 1) * 4) - x);
-			                    
-			                    var r = imgDat.data[index  ];
-			                    var g = imgDat.data[index+1];
-			                    var b = imgDat.data[index+2];
-			                    var a = imgDat.data[index+3];
-			                    
-			                    imgDat.data[index  ]    = imgDat.data[lastLineIndex  ];
-			                    imgDat.data[index+1]    = imgDat.data[lastLineIndex+1];
-			                    imgDat.data[index+2]    = imgDat.data[lastLineIndex+2];
-			                    imgDat.data[index+3]    = imgDat.data[lastLineIndex+3];
-			                    
-			                    imgDat.data[lastLineIndex  ]    = r;
-			                    imgDat.data[lastLineIndex+1]    = g;
-			                    imgDat.data[lastLineIndex+2]    = b;
-			                    imgDat.data[lastLineIndex+3]    = a;
-			                }
-			            }
-			            
-			            canvasBgContext.putImageData(imgDat, 0, 0);
-			        break;
-			    case 66:    /* B */
-			    case 98:    /* b */
-			            
-			            /* Convert canvasdata to black and white -> ctrl+b- or ctrl+B-Keyshortcut */
-			            if(!e.ctrlKey) {
-			                break;
-			            }
-			            
-			            var imgDat = canvasBgContext.getImageData(0, 0, canvasBg.width, canvasBg.height);
-			            
-			            for(var y = 0; y < imgDat.height; y++) {
-			                var xBegin = y * (imgDat.width * 4);
-			                for(var x = 0; x < (imgDat.width * 4); x+=4) {
-			                    var i = xBegin + x;
-			                    
-			                    var r = imgDat.data[i  ],
-			                        g = imgDat.data[i+1],
-			                        b = imgDat.data[i+2];
-			                        
-			                    //var average = Math.max(r, Math.max(g, b))
-			                    //              + Math.min(r, Math.min(g, b)) / 2;  // lightness
-			                    var average = (r + g + b) / 3;                      // average
-			                    //var average = (r * 0.21 + g * 0.71 + b * 0.07);   // luminosity
-			                    
-			                    average = Math.floor(average);    
-			                    
-			                    imgDat.data[i  ]    = average;
+            //e.shiftKey
+            //e.altKey
+            //e.metaKey
+            
+            console.log(e, e.which, e.keyCode);
+            
+            switch(e.which || e.keyCode) {
+                case 73:    /* I */
+                case 105:   /* i */
+                        /* Mirror canvasdata horizontally -> i- or I-Key */
+                        var imgDat = canvasBgContext.getImageData(0, 0, canvasBg.width, canvasBg.height);
+                        
+                        for(var y = 0; y < imgDat.height; y++) {
+                            var xBegin = y * (imgDat.width * 4);
+                            for(var x = 0; x < (imgDat.width * 4) / 2; x+=4) {
+                                var index = xBegin + x;
+                                var lastLineIndex = xBegin + (((imgDat.width - 1) * 4) - x);
+                                
+                                var r = imgDat.data[index  ];
+                                var g = imgDat.data[index+1];
+                                var b = imgDat.data[index+2];
+                                var a = imgDat.data[index+3];
+                                
+                                imgDat.data[index  ]    = imgDat.data[lastLineIndex  ];
+                                imgDat.data[index+1]    = imgDat.data[lastLineIndex+1];
+                                imgDat.data[index+2]    = imgDat.data[lastLineIndex+2];
+                                imgDat.data[index+3]    = imgDat.data[lastLineIndex+3];
+                                
+                                imgDat.data[lastLineIndex  ]    = r;
+                                imgDat.data[lastLineIndex+1]    = g;
+                                imgDat.data[lastLineIndex+2]    = b;
+                                imgDat.data[lastLineIndex+3]    = a;
+                            }
+                        }
+                        
+                        canvasBgContext.putImageData(imgDat, 0, 0);
+                    break;
+                case 66:    /* B */
+                case 98:    /* b */
+                        
+                        /* Convert canvasdata to black and white -> ctrl+b- or ctrl+B-Keyshortcut */
+                        if(!e.ctrlKey) {
+                            break;
+                        }
+                        
+                        var imgDat = canvasBgContext.getImageData(0, 0, canvasBg.width, canvasBg.height);
+                        
+                        for(var y = 0; y < imgDat.height; y++) {
+                            var xBegin = y * (imgDat.width * 4);
+                            for(var x = 0; x < (imgDat.width * 4); x+=4) {
+                                var i = xBegin + x;
+                                
+                                var r = imgDat.data[i  ],
+                                    g = imgDat.data[i+1],
+                                    b = imgDat.data[i+2];
+                                    
+                                //var average = Math.max(r, Math.max(g, b))
+                                //              + Math.min(r, Math.min(g, b)) / 2;  // lightness
+                                var average = (r + g + b) / 3;                      // average
+                                //var average = (r * 0.21 + g * 0.71 + b * 0.07);   // luminosity
+                                
+                                average = Math.floor(average);    
+                                
+                                imgDat.data[i  ]    = average;
                                 imgDat.data[i+1]    = average;
-			                    imgDat.data[i+2]    = average;
-			                    //imgDat.data[i+3] // leaving alpha the way it is
-			                 }
-			            }
-			            
-			            canvasBgContext.putImageData(imgDat, 0, 0);
-			            e.preventDefault();
-			        break;
-			}
+                                imgDat.data[i+2]    = average;
+                                //imgDat.data[i+3] // leaving alpha the way it is
+                             }
+                        }
+                        
+                        canvasBgContext.putImageData(imgDat, 0, 0);
+                        e.preventDefault();
+                    break;
+            }
         };
         
         
