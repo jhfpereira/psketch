@@ -1,9 +1,21 @@
 
-/*
- *  P>>Sketch - SimpleBrush
- *  
- *      > J.H.F.P
- *      > February 2012
+/**
+ * P>>Sketch
+ * 
+ * P>>Sketch is a simple painting tool to be used in a browser, which supports basic painting operations
+ *    Written with the intention to learn more about javascript and the HTML5 canvas element
+ *       enjoy :)
+ * 
+ *
+ * Copyright 2012 Jorge H. F. Pereira
+ *
+ * Released under the MIT and GPL Licenses.
+ *
+ *
+ * author:  Jorge H. F. Pereira
+ * version: 0.1
+ * source:  http://github.com/jhfpereira/psketch/
+ *
  */
 
 
