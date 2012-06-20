@@ -245,7 +245,7 @@ var PSketch;
             /* Right mousebutton -> undo current drawing in action */
             else if(e.which == 3) {
                 context.clearRect(0, 0, canvasWidth, canvasHeight);
-                //brushUp(e);
+                /* brushUp(e); */
             }
             
         };
@@ -304,10 +304,8 @@ var PSketch;
                 canvas.removeEventListener("mouseout", brushOut);
                 
                 if(!brushOptions.eraser && !e.shiftKey) {
-                    /*
-                     * Get brushlines and merge it with the canvas in the background
-                     *  (in a really, really dirty way)
-                     */
+                    /* Get brushlines and merge it with the canvas in the background
+                        (in a really, really dirty way) */
                     canvasBgContext.save();
                     canvasBgContext.globalAlpha = brushOptions.color.alpha;
                     canvasBgContext.drawImage(context.canvas, 0, 0);
@@ -315,9 +313,7 @@ var PSketch;
                     
                     context.clearRect(0, 0, canvasWidth, canvasHeight);
                     
-                    /*
-                     * Reset the top canvas opacity to its default value
-                     */
+                    /* Reset the top canvas opacity to its default value */
                     canvas.style.opacity = "1.0";
                 }
             }
@@ -522,11 +518,13 @@ var PSketch;
         
         
         var shortcutPressed = function(e) {
-            //console.log("keyPressed:", e.which || e.keyCode);
-            //e.ctrlKey
-            //e.shiftKey
-            //e.altKey
-            //e.metaKey
+            /*
+               console.log("keyPressed:", e.which || e.keyCode);
+               e.ctrlKey
+               e.shiftKey
+               e.altKey
+               e.metaKey
+            */
             
             console.log(e, e.which, e.keyCode);
             
@@ -580,17 +578,17 @@ var PSketch;
                                     g = imgDat.data[i+1],
                                     b = imgDat.data[i+2];
                                     
-                                //var average = Math.max(r, Math.max(g, b))
-                                //              + Math.min(r, Math.min(g, b)) / 2;  // lightness
-                                var average = (r + g + b) / 3;                      // average
-                                //var average = (r * 0.21 + g * 0.71 + b * 0.07);   // luminosity
+                                /* var average = Math.max(r, Math.max(g, b))
+                                              + Math.min(r, Math.min(g, b)) / 2; */     /* lightness */
+                                var average = (r + g + b) / 3;                          /* average */
+                                /* var average = (r * 0.21 + g * 0.71 + b * 0.07); */   /* luminosity */
                                 
                                 average = Math.floor(average);    
                                 
                                 imgDat.data[i  ]    = average;
                                 imgDat.data[i+1]    = average;
                                 imgDat.data[i+2]    = average;
-                                //imgDat.data[i+3] // leaving alpha the way it is
+                                /* imgDat.data[i+3] */ /* leaving alpha the way it is*/
                              }
                         }
                         
@@ -609,15 +607,11 @@ var PSketch;
         
         
         var saveCanvas = function(alpha) {
-            /*
-             *  Open a new window (tab) and pass the image as a dataURL to it
-             */
+            /* Open a new window (tab) and pass the image as a dataURL to it */
             
             var chosenCanvas = canvasBg;
             
-            /*
-             * With backgroundcolor?
-             */
+            /* With backgroundcolor? */
             if(!alpha) {
                 
                 var chosenCanvasContext = chosenCanvas.getContext("2d");
@@ -881,10 +875,8 @@ var PSketch;
             document.body.addEventListener("selectstart", function (e) { e.preventDefault(); return false; });
             
             
-            /*
-             * Load all possible options through the locationhash,
-             *      if given overwrites options set through the 'setOptions'-method!
-             */
+            /* Load all possible options through the locationhash, 
+                if given overwrites options set through the 'setOptions'-method! */
             var hash = window.location.hash;
             if(hash.length > 1) {
                 hash = hash.slice(1, hash.length);
@@ -903,9 +895,7 @@ var PSketch;
             }
             
             
-            /*
-             *  Toolbar
-             */
+            /* Toolbar */
             canvasToolbar = document.createElement("div");
             canvasToolbar.setAttribute("id", "toolbar");
             

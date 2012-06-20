@@ -16,9 +16,6 @@
  * version: 0.1
  * source:  http://github.com/jhfpereira/psketch/
  *
- *
- * "I'll see you in another life, when we are both cats."
- *
  */
 
 
@@ -51,9 +48,9 @@
                 if(brushOptions.eraser) {
                     ctx.globalCompositeOperation = "destination-out";
                     color = {
-                        r: 255, // dummy value
-                        g: 255, // dummy value
-                        b: 255, // dummy value
+                        r: 255, /* dummy value */
+                        g: 255, /* dummy value */
+                        b: 255, /* dummy value */
                         alpha: brushOptions.color.alpha
                     }
                 }
@@ -90,7 +87,7 @@
         };
         
         this.stopPainting = function(ctx, brushPos, brushOptions) {
-            // nothing to do here for now
+            /* nothing to do here for now */
         };
     };
 
