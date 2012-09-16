@@ -1185,9 +1185,11 @@ var PSketch;
             document.body.appendChild(canvasContainer);
             
             canvasBgContext = canvasBg.getContext("2d");
+            canvasBgContext.fillRect(0, 0, canvasWidth, canvasHeight);
             canvasBgContext.clearRect(0, 0, canvasWidth, canvasHeight);
             
             context = canvas.getContext("2d");
+            context.fillRect(0, 0, canvasWidth, canvasHeight);
             context.clearRect(0, 0, canvasWidth, canvasHeight);
             
             if(brushList.length > 0) {
