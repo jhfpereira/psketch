@@ -53,6 +53,7 @@ var PSketch;
             alreadyInitialized = false,
             prevTimeStamp = -1,
             mouseDown = false,
+            shiftDown = false,
             
             canvasOptions = {
                 color: {
@@ -232,6 +233,7 @@ var PSketch;
                 }
                 
                 if(e.shiftKey && brushPrevPos.x >= 0 && brushPrevPos.y >= 0) {
+                    shiftDown = true;
                     brushMove(e);
                 }
                 else {
@@ -245,7 +247,7 @@ var PSketch;
             /* Right mousebutton -> undo current drawing in action */
             else if(e.which == 3) {
                 context.clearRect(0, 0, canvasWidth, canvasHeight);
-                /* brushUp(e); */
+                brushUp(e);
             }
             
         };
@@ -303,7 +305,7 @@ var PSketch;
                 canvas.removeEventListener("mousemove", brushMove);
                 canvas.removeEventListener("mouseout", brushOut);
                 
-                if(!brushOptions.eraser && !e.shiftKey) {
+                if(!brushOptions.eraser && !shiftDown) {
                     /* Get brushlines and merge it with the canvas in the background
                         (in a really, really dirty way) */
                     canvasBgContext.save();
@@ -599,6 +601,18 @@ var PSketch;
         };
         
         
+        var shortcutReleased = function(e) {
+            
+            /* check if shiftkey was released */
+            if(shiftDown && (typeof e.shiftKey != 'undefined')) {
+                shiftDown = false;
+                mouseDown = true;
+                brushUp(e);
+            }
+        };
+        
+        
+        
         var clearCanvas = function() {
             if(confirm("Are your sure?")) {
                 canvasBgContext.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -870,6 +884,7 @@ var PSketch;
             
             /* Bind a key listener to the body element */
             document.body.addEventListener("keydown", shortcutPressed);
+            document.body.addEventListener("keyup", shortcutReleased);
             
             /* Prevent textselection (trying) */
             document.body.addEventListener("selectstart", function (e) { e.preventDefault(); return false; });
